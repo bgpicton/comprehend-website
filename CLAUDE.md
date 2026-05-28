@@ -65,8 +65,8 @@ Then open `http://localhost:8000`. Opening `index.html` via `file://` also works
 Standard static site. Nothing surprising:
 
 - `index.html`, `people.html`, `research.html` — the three pages
-- `css/styles.css` — shared stylesheet (one file, do not split)
-- `js/main.js` — sticky-nav shadow + mobile hamburger toggle. That's all the JS the site needs.
+- `css/styles.css` — shared stylesheet (one file, do not split). Includes a `prefers-color-scheme` dark mode built on semantic CSS custom properties, and a print stylesheet for the research page.
+- `js/main.js` — one IIFE, feature-detected and guarded so each block only runs where its elements exist: mobile hamburger toggle, sticky-nav shadow, sticky-bar height measurement (`--nav-h` / `--toolbar-h`), the research toolbar (chip counts, year-filter options, search/type/year filtering, scroll-spy, copy-citation/BibTeX), people-page bio clamp toggles, home-page stat counters, and scroll-reveal. All animation respects `prefers-reduced-motion`.
 - `assets/` — `logo.png`, `banner.png`, `network.svg`, `wave-divider.svg`, `silhouette.svg`, plus `people/` for real headshots when they land
 - `README.md` — human-facing editing instructions
 
@@ -75,22 +75,24 @@ Standard static site. Nothing surprising:
 The complete current roster lives in `people.html`. Three top-level groups:
 
 1. **Co-Founders** (3) — Saman Andalib (UCI Ortho PGY-1), Bryce Picton (Henry Ford Neurosurgery PGY-1), Aidin Spina (UCSD Ophthalmology PGY-1). All wear the teal `FOUNDER` pill.
-2. **Faculty** (7) — grouped by specialty: Anesthesiology/Pain (Nelson), Orthopaedic Surgery (Scolaro, Hebert-Davies, Wu, Hashmi, Park), Neurosurgery (Oh), Ophthalmology (Fox). All wear the teal `ATTENDING PHYSICIAN` pill.
-3. **Trainees & Students** (8) — MS3 (Brunette, Thiagarajan), MS2 (Cheng, Huang, Liu, Tazhibi, Habib), MS1 (Solimon, Chandekar), PhD (Ilaty), Undergraduate (R. Andalib). No pill.
+2. **Faculty** (8) — grouped by specialty: Anesthesiology/Pain (Nelson), Orthopaedic Surgery (Scolaro, Hebert-Davies, Wu, Hashmi, Park), Neurosurgery (Oh), Ophthalmology (Fox). All wear the teal `ATTENDING PHYSICIAN` pill.
+3. **Trainees & Students** (11) — MS3 (Brunette, Thiagarajan), MS2 (Cheng, Huang, Liu, Tazhibi, Habib), MS1 (Solimon, Chandekar), PhD (Ilaty), Undergraduate (R. Andalib). No pill.
 
-Card template: `<article class="person">` containing a headshot `<img>`, optional pill, `<h3>` name, `.role` line, `.affiliation` line, and `.email` link. Copy any existing card to add a new member.
+Total: 22 members. If you add or remove members, update the `data-target` on the "Lab members" stat in `index.html` to match.
 
-## Outstanding work (search the source for `TODO`)
+Card template: `<article class="person">` containing a headshot `<img>`, optional pill, `<h3>` name, `.role` line, `.affiliation` line, an optional `.bio` paragraph, and `.email` link. Copy any existing card to add a new member. Bios are clamped to four lines and JavaScript adds a "Read more" toggle automatically when one overflows, so paste the full bio as-is.
 
-1. **Long-term goals copy** — `index.html`, three placeholder cards under "LONG-TERM IMPACT". Currently striped diagonal pattern + "PLACEHOLDER" labels so they read as obviously unfinished.
-2. **Real emails** — every member currently has `firstname.lastname@comprehendlab.com` with a `<!-- TODO: confirm email -->` comment beside it.
-3. **Real headshots** — every member uses `assets/silhouette.svg`. Drop real photos into `assets/people/` named `firstname-lastname.jpg` and update the `src=` and `alt=`.
-4. **Remaining research entries** — `research.html` has one seeded publication (JMIR AI 2024, Andalib bolded as a lab member). Talks, Posters, Grants, Awards each have a single italic placeholder `<li class="placeholder">` with a format comment above the `<ul>`. Newest entries go on top within each section.
+## Outstanding work
+
+1. **Real emails** — most members have real addresses now. Confirm any remaining placeholders and drop the `<!-- TODO: confirm email -->` comment when you do.
+2. **Real headshots** — several members still use `assets/silhouette.svg`. Drop real photos into `assets/people/` named `firstname-lastname.jpg` and update the `src=` and `alt=`.
+3. **Grants section** — hidden (commented out near the bottom of `research.html`) until the first real entry. To restore: uncomment that block and add a `Grants` chip to `.section-jump` in the research toolbar. Awards, Publications, Talks, and Posters are all populated.
 
 ## Conventions when editing
 
-- **Publication formatting**: `Authors. <a href="PubMed URL">Title</a>. <em>Journal</em>. Year;Volume:Pages. doi:DOI`. Bold any lab member with `<strong>Last F</strong>`. Italicize the journal with `<em>`.
-- **Pills**: only co-founders get `FOUNDING MEMBER`, only attendings get `ATTENDING PHYSICIAN`. Trainees have no pill.
+- **Research entries**: every item is a `<li class="research-item" data-type="…" data-year="YYYY">` with the visible citation inside a `.item-body` div. `data-type` is `award` / `publication` / `talk` / `poster` / `grant` and drives the type filter and chip counts; `data-year` drives the year filter and the publication year subheadings. The chip counts, year dropdown, and numbering update automatically from the DOM.
+- **Publication formatting**: inside `.item-body`, `Authors. <a href="DOI/PubMed URL">Title</a>. <em>Journal</em>. Year;Volume:Pages. doi:DOI`. Bold any lab member with `<strong>Last F</strong>`. Italicize the journal with `<em>`. Add `<span class="oa-badge">Open access</span>` for free full text. Publications also carry citation `data-*` attributes (`data-authors`, `data-title`, `data-journal`, `data-volume`, `data-pages`, `data-doi`, or `data-url`) plus two `.cite-btn` buttons (`data-cite="copy"` and `data-cite="bibtex"`); keep the data attributes in sync with the visible text. Copy an existing publication `<li>` as the template. Group under the right year `<li class="year-head">YYYY</li>`, newest on top.
+- **Pills**: only co-founders get `Founder`, only attendings get `Attending Physician`. Trainees have no pill.
 - **Eyebrows**: short ALL-CAPS labels in teal, used to label section purpose ("OUR MISSION", "WHAT WE STUDY", "PUBLICATIONS", etc.). Never longer than ~3 words.
 - **Accessibility**: every interactive element keeps a visible focus state (`:focus-visible` is wired). Every image has meaningful `alt` text. The page respects `prefers-reduced-motion`.
 - **Responsive**: mobile-first. Breakpoints at 600px (people grid 2 cols), 768px (card grids 2 cols, nav switches from hamburger to horizontal), 1024px (3-col grids, looser padding). Layout has been verified at 375 / 768 / 1280.

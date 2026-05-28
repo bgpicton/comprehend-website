@@ -47,7 +47,42 @@
         <p class="lead">Awards, peer-reviewed publications, talks, posters, and grants from the lab. Newest first within each category.</p>
       </div>
     </section>
-    <div class="wave-divider" aria-hidden="true"></div>
+
+    <!-- ============================================================
+         STICKY TOOLBAR — section jumps + filters
+         Counts in the chips are filled by js/main.js from the DOM.
+         ============================================================ -->
+    <nav class="research-toolbar" aria-label="Research sections and filters">
+      <div class="container toolbar-inner">
+        <ul class="section-jump">
+          <li><a class="jump-link" href="#awards" data-jump="awards">Awards <span class="chip-count" data-count-for="award"></span></a></li>
+          <li><a class="jump-link" href="#publications" data-jump="publications">Publications <span class="chip-count" data-count-for="publication"></span></a></li>
+          <li><a class="jump-link" href="#talks" data-jump="talks">Talks <span class="chip-count" data-count-for="talk"></span></a></li>
+          <li><a class="jump-link" href="#posters" data-jump="posters">Posters <span class="chip-count" data-count-for="poster"></span></a></li>
+        </ul>
+        <div class="research-filters" role="search">
+          <label class="sr-only" for="research-search">Search by title or author</label>
+          <input type="search" id="research-search" class="filter-input" placeholder="Search title or author…" autocomplete="off">
+          <label class="sr-only" for="type-filter">Filter by type</label>
+          <select id="type-filter" class="filter-select" aria-label="Filter by type">
+            <option value="">All types</option>
+            <option value="award">Awards</option>
+            <option value="publication">Publications</option>
+            <option value="talk">Talks</option>
+            <option value="poster">Posters</option>
+          </select>
+          <label class="sr-only" for="year-filter">Filter by year</label>
+          <select id="year-filter" class="filter-select" aria-label="Filter by year">
+            <option value="">All years</option>
+          </select>
+          <button type="button" class="clear-filters" id="clear-filters" hidden>Clear</button>
+        </div>
+      </div>
+    </nav>
+
+    <p class="no-results container" id="no-results" hidden>
+      No entries match your filters. <button type="button" class="link-btn" data-clear>Clear filters</button>
+    </p>
 
     <!-- ============================================================
          AWARDS
@@ -55,26 +90,26 @@
          AWARD ENTRY FORMAT:
          Recipient (bold lab members). "Award Name." Granting body. Year.
          ============================================================ -->
-    <section class="research-section" aria-labelledby="awards-heading">
+    <section class="research-section" id="awards" data-section="award" aria-labelledby="awards-heading">
       <div class="container">
         <span class="eyebrow">Awards</span>
         <h2 id="awards-heading">Awards</h2>
         <ul class="research-list">
 
-          <li>
-            <strong>Spina A</strong>. "Best Poster" Award for "Deep Learning-Driven Glaucoma Medication Recognition: A Clinical Validation Study in Non-English Speaking Patients with Impaired Vision." American Academy of Ophthalmology Annual Conference. 2024.
+          <li class="research-item" data-type="award" data-year="2024">
+            <div class="item-body"><strong>Spina A</strong>. "Best Poster" Award for "Deep Learning-Driven Glaucoma Medication Recognition: A Clinical Validation Study in Non-English Speaking Patients with Impaired Vision." American Academy of Ophthalmology Annual Conference. 2024.</div>
           </li>
 
-          <li>
-            <strong>Spina A</strong>. "Best Presentation" Award for "ChatGPT Has the Potential to Increase Accessibility to Cardiology Research." American Heart Association Annual Conference. 2023.
+          <li class="research-item" data-type="award" data-year="2023">
+            <div class="item-body"><strong>Spina A</strong>. "Best Presentation" Award for "ChatGPT Has the Potential to Increase Accessibility to Cardiology Research." American Heart Association Annual Conference. 2023.</div>
           </li>
 
-          <li>
-            <strong>Spina A</strong>. "Best Poster" Award for "Tailoring Glaucoma Education Using GPT-4: Addressing Health-Care Disparities in Patient Comprehension." American Academy of Ophthalmology Annual Conference. 2023.
+          <li class="research-item" data-type="award" data-year="2023">
+            <div class="item-body"><strong>Spina A</strong>. "Best Poster" Award for "Tailoring Glaucoma Education Using GPT-4: Addressing Health-Care Disparities in Patient Comprehension." American Academy of Ophthalmology Annual Conference. 2023.</div>
           </li>
 
-          <li>
-            <strong>Picton B</strong>. Top Abstract Award for "Artificial Intelligence for Improving Readability in Spine Research." Pacific Spine and Pain Society Annual Meeting. 2023.
+          <li class="research-item" data-type="award" data-year="2023">
+            <div class="item-body"><strong>Picton B</strong>. Top Abstract Award for "Artificial Intelligence for Improving Readability in Spine Research." Pacific Spine and Pain Society Annual Meeting. 2023.</div>
           </li>
 
         </ul>
@@ -91,73 +126,191 @@
          Title (linked to PubMed/DOI).
          Journal (italicized). Year;Volume:Pages. doi:DOI
 
-         To add an entry, copy a <li> block, fill in the citation
-         using the format above, and place the newest entry on top.
+         Each <li> carries data-* attributes that feed the Copy
+         citation and BibTeX buttons. Keep them in sync with the
+         visible text. Add an <span class="oa-badge">Open access</span>
+         inside .item-body when the article is free to read.
+         Newest entry on top; group under the right year subheading.
          ============================================================ -->
-    <section class="research-section" aria-labelledby="pubs-heading">
+    <section class="research-section" id="publications" data-section="publication" aria-labelledby="pubs-heading">
       <div class="container">
         <span class="eyebrow">Publications</span>
         <h2 id="pubs-heading">Publications</h2>
         <ul class="research-list">
 
-          <li>
-            <strong>Andalib S</strong>, <strong>Spina A</strong>, Halaseh FF, <strong>Thiagarajan AB</strong>, Vermani R, Liang J, Wiechmann WF.
-            <a href="https://doi.org/10.5811/westjem.46577" target="_blank" rel="noopener">An Organized Approach to Using Large Language Models for Medical Information</a>.
-            <em>Western Journal of Emergency Medicine</em>. 2025;27(1):194-204. doi:10.5811/westjem.46577
+          <li class="year-head">2025</li>
+
+          <li class="research-item" data-type="publication" data-year="2025"
+              data-authors="Andalib S, Spina A, Halaseh FF, Thiagarajan AB, Vermani R, Liang J, Wiechmann WF"
+              data-title="An Organized Approach to Using Large Language Models for Medical Information"
+              data-journal="Western Journal of Emergency Medicine"
+              data-volume="27(1)" data-pages="194-204" data-doi="10.5811/westjem.46577">
+            <div class="item-body">
+              <strong>Andalib S</strong>, <strong>Spina A</strong>, Halaseh FF, <strong>Thiagarajan AB</strong>, Vermani R, Liang J, Wiechmann WF.
+              <a href="https://doi.org/10.5811/westjem.46577" target="_blank" rel="noopener">An Organized Approach to Using Large Language Models for Medical Information</a>.
+              <em>Western Journal of Emergency Medicine</em>. 2025;27(1):194-204. doi:10.5811/westjem.46577
+              <span class="oa-badge" title="Free full text">Open access</span>
+            </div>
+            <div class="item-actions">
+              <button type="button" class="cite-btn" data-cite="copy">Copy citation</button>
+              <button type="button" class="cite-btn" data-cite="bibtex">BibTeX</button>
+            </div>
           </li>
 
-          <li>
-            <strong>Andalib S</strong>, <strong>Spina A</strong>, <strong>Picton B</strong>, <strong>Thiagarajan A</strong>, Solomon SS, <strong>Scolaro JA</strong>, <strong>Nelson AM</strong>.
-            <a href="https://doi.org/10.2106/JBJS.OA.25.00174" target="_blank" rel="noopener">Language Complexity Shapes Engagement with Orthopaedic Information on Social Media: A Prospective Analysis</a>.
-            <em>JBJS Open Access</em>. 2025;10(4):e25.00174. doi:10.2106/JBJS.OA.25.00174
+          <li class="research-item" data-type="publication" data-year="2025"
+              data-authors="Andalib S, Spina A, Picton B, Thiagarajan A, Solomon SS, Scolaro JA, Nelson AM"
+              data-title="Language Complexity Shapes Engagement with Orthopaedic Information on Social Media: A Prospective Analysis"
+              data-journal="JBJS Open Access"
+              data-volume="10(4)" data-pages="e25.00174" data-doi="10.2106/JBJS.OA.25.00174">
+            <div class="item-body">
+              <strong>Andalib S</strong>, <strong>Spina A</strong>, <strong>Picton B</strong>, <strong>Thiagarajan A</strong>, Solomon SS, <strong>Scolaro JA</strong>, <strong>Nelson AM</strong>.
+              <a href="https://doi.org/10.2106/JBJS.OA.25.00174" target="_blank" rel="noopener">Language Complexity Shapes Engagement with Orthopaedic Information on Social Media: A Prospective Analysis</a>.
+              <em>JBJS Open Access</em>. 2025;10(4):e25.00174. doi:10.2106/JBJS.OA.25.00174
+              <span class="oa-badge" title="Free full text">Open access</span>
+            </div>
+            <div class="item-actions">
+              <button type="button" class="cite-btn" data-cite="copy">Copy citation</button>
+              <button type="button" class="cite-btn" data-cite="bibtex">BibTeX</button>
+            </div>
           </li>
 
-          <li>
-            <strong>Andalib S</strong>, <strong>Spina A</strong>, <strong>Picton B</strong>, Solomon SS, <strong>Scolaro JA</strong>, <strong>Nelson AM</strong>.
-            <a href="https://doi.org/10.2196/70222" target="_blank" rel="noopener">Using AI to Translate and Simplify Spanish Orthopedic Medical Text: Instrument Validation Study</a>.
-            <em>JMIR AI</em>. 2025;4(1):e70222. doi:10.2196/70222
+          <li class="research-item" data-type="publication" data-year="2025"
+              data-authors="Andalib S, Spina A, Picton B, Solomon SS, Scolaro JA, Nelson AM"
+              data-title="Using AI to Translate and Simplify Spanish Orthopedic Medical Text: Instrument Validation Study"
+              data-journal="JMIR AI"
+              data-volume="4(1)" data-pages="e70222" data-doi="10.2196/70222">
+            <div class="item-body">
+              <strong>Andalib S</strong>, <strong>Spina A</strong>, <strong>Picton B</strong>, Solomon SS, <strong>Scolaro JA</strong>, <strong>Nelson AM</strong>.
+              <a href="https://doi.org/10.2196/70222" target="_blank" rel="noopener">Using AI to Translate and Simplify Spanish Orthopedic Medical Text: Instrument Validation Study</a>.
+              <em>JMIR AI</em>. 2025;4(1):e70222. doi:10.2196/70222
+              <span class="oa-badge" title="Free full text">Open access</span>
+            </div>
+            <div class="item-actions">
+              <button type="button" class="cite-btn" data-cite="copy">Copy citation</button>
+              <button type="button" class="cite-btn" data-cite="bibtex">BibTeX</button>
+            </div>
           </li>
 
-          <li>
-            <strong>Spina A</strong>, Yang C, Jain A, Ha C, Chen L, Yee P, Lin K.
-            <a href="https://www.ophthalmologyscience.org/article/S2666-9145(25)00056-9/fulltext" target="_blank" rel="noopener">Deep Learning-Driven Glaucoma Medication Recognition: A Multilingual Clinical Validation Study in Patients with Impaired Vision</a>.
-            <em>Ophthalmology Science</em>. 2025.
+          <li class="research-item" data-type="publication" data-year="2025"
+              data-authors="Spina A, Yang C, Jain A, Ha C, Chen L, Yee P, Lin K"
+              data-title="Deep Learning-Driven Glaucoma Medication Recognition: A Multilingual Clinical Validation Study in Patients with Impaired Vision"
+              data-journal="Ophthalmology Science"
+              data-url="https://www.ophthalmologyscience.org/article/S2666-9145(25)00056-9/fulltext">
+            <div class="item-body">
+              <strong>Spina A</strong>, Yang C, Jain A, Ha C, Chen L, Yee P, Lin K.
+              <a href="https://www.ophthalmologyscience.org/article/S2666-9145(25)00056-9/fulltext" target="_blank" rel="noopener">Deep Learning-Driven Glaucoma Medication Recognition: A Multilingual Clinical Validation Study in Patients with Impaired Vision</a>.
+              <em>Ophthalmology Science</em>. 2025.
+              <span class="oa-badge" title="Free full text">Open access</span>
+            </div>
+            <div class="item-actions">
+              <button type="button" class="cite-btn" data-cite="copy">Copy citation</button>
+              <button type="button" class="cite-btn" data-cite="bibtex">BibTeX</button>
+            </div>
           </li>
 
-          <li>
-            Scherr R, <strong>Spina A</strong>, Dao A, <strong>Andalib S</strong>, Halaseh FF, Blair S, Wiechmann W, Rivera R.
-            <a href="https://doi.org/10.2196/66478" target="_blank" rel="noopener">Novel Evaluation Metric and Quantified Performance of ChatGPT-4 Patient Management Simulations for Early Clinical Education: Experimental Study</a>.
-            <em>JMIR Formative Research</em>. 2025;9(1):e66478. doi:10.2196/66478
+          <li class="research-item" data-type="publication" data-year="2025"
+              data-authors="Scherr R, Spina A, Dao A, Andalib S, Halaseh FF, Blair S, Wiechmann W, Rivera R"
+              data-title="Novel Evaluation Metric and Quantified Performance of ChatGPT-4 Patient Management Simulations for Early Clinical Education: Experimental Study"
+              data-journal="JMIR Formative Research"
+              data-volume="9(1)" data-pages="e66478" data-doi="10.2196/66478">
+            <div class="item-body">
+              Scherr R, <strong>Spina A</strong>, Dao A, <strong>Andalib S</strong>, Halaseh FF, Blair S, Wiechmann W, Rivera R.
+              <a href="https://doi.org/10.2196/66478" target="_blank" rel="noopener">Novel Evaluation Metric and Quantified Performance of ChatGPT-4 Patient Management Simulations for Early Clinical Education: Experimental Study</a>.
+              <em>JMIR Formative Research</em>. 2025;9(1):e66478. doi:10.2196/66478
+              <span class="oa-badge" title="Free full text">Open access</span>
+            </div>
+            <div class="item-actions">
+              <button type="button" class="cite-btn" data-cite="copy">Copy citation</button>
+              <button type="button" class="cite-btn" data-cite="bibtex">BibTeX</button>
+            </div>
           </li>
 
-          <li>
-            <strong>Spina A</strong>, Fereydouni P, Tang JN, <strong>Andalib S</strong>, <strong>Picton B</strong>, <strong>Fox A</strong>.
-            <a href="https://doi.org/10.1097/MD.0000000000041059" target="_blank" rel="noopener">Tailoring Glaucoma Education Using Large Language Models: Addressing Health Disparities in Patient Comprehension</a>.
-            <em>Medicine</em>. 2025;104(2):e41059. doi:10.1097/MD.0000000000041059
+          <li class="research-item" data-type="publication" data-year="2025"
+              data-authors="Spina A, Fereydouni P, Tang JN, Andalib S, Picton B, Fox A"
+              data-title="Tailoring Glaucoma Education Using Large Language Models: Addressing Health Disparities in Patient Comprehension"
+              data-journal="Medicine"
+              data-volume="104(2)" data-pages="e41059" data-doi="10.1097/MD.0000000000041059">
+            <div class="item-body">
+              <strong>Spina A</strong>, Fereydouni P, Tang JN, <strong>Andalib S</strong>, <strong>Picton B</strong>, <strong>Fox A</strong>.
+              <a href="https://doi.org/10.1097/MD.0000000000041059" target="_blank" rel="noopener">Tailoring Glaucoma Education Using Large Language Models: Addressing Health Disparities in Patient Comprehension</a>.
+              <em>Medicine</em>. 2025;104(2):e41059. doi:10.1097/MD.0000000000041059
+              <span class="oa-badge" title="Free full text">Open access</span>
+            </div>
+            <div class="item-actions">
+              <button type="button" class="cite-btn" data-cite="copy">Copy citation</button>
+              <button type="button" class="cite-btn" data-cite="bibtex">BibTeX</button>
+            </div>
           </li>
 
-          <li>
-            <strong>Andalib S</strong>, Solomon SS, <strong>Picton B</strong>, <strong>Spina A</strong>, <strong>Scolaro JA</strong>, <strong>Nelson AM</strong>.
-            <a href="https://doi.org/10.2106/JBJS.OA.24.00007" target="_blank" rel="noopener">Source Characteristics Influence AI-Enabled Orthopaedic Text Simplification: Recommendations for the Future</a>.
-            <em>JBJS Open Access</em>. 2025;10(1):e24.00007. doi:10.2106/JBJS.OA.24.00007
+          <li class="research-item" data-type="publication" data-year="2025"
+              data-authors="Andalib S, Solomon SS, Picton B, Spina A, Scolaro JA, Nelson AM"
+              data-title="Source Characteristics Influence AI-Enabled Orthopaedic Text Simplification: Recommendations for the Future"
+              data-journal="JBJS Open Access"
+              data-volume="10(1)" data-pages="e24.00007" data-doi="10.2106/JBJS.OA.24.00007">
+            <div class="item-body">
+              <strong>Andalib S</strong>, Solomon SS, <strong>Picton B</strong>, <strong>Spina A</strong>, <strong>Scolaro JA</strong>, <strong>Nelson AM</strong>.
+              <a href="https://doi.org/10.2106/JBJS.OA.24.00007" target="_blank" rel="noopener">Source Characteristics Influence AI-Enabled Orthopaedic Text Simplification: Recommendations for the Future</a>.
+              <em>JBJS Open Access</em>. 2025;10(1):e24.00007. doi:10.2106/JBJS.OA.24.00007
+              <span class="oa-badge" title="Free full text">Open access</span>
+            </div>
+            <div class="item-actions">
+              <button type="button" class="cite-btn" data-cite="copy">Copy citation</button>
+              <button type="button" class="cite-btn" data-cite="bibtex">BibTeX</button>
+            </div>
           </li>
 
-          <li>
-            <strong>Picton B</strong>, <strong>Andalib S</strong>, <strong>Spina A</strong>, Camp B, Solomon SS, Liang J, Chen PM, Chen JW, Hsu FP, <strong>Oh MY</strong>.
-            <a href="https://doi.org/10.1016/j.ijmedinf.2024.105743" target="_blank" rel="noopener">Assessing AI Simplification of Medical Texts: Readability and Content Fidelity</a>.
-            <em>International Journal of Medical Informatics</em>. 2025;195:105743. doi:10.1016/j.ijmedinf.2024.105743
+          <li class="research-item" data-type="publication" data-year="2025"
+              data-authors="Picton B, Andalib S, Spina A, Camp B, Solomon SS, Liang J, Chen PM, Chen JW, Hsu FP, Oh MY"
+              data-title="Assessing AI Simplification of Medical Texts: Readability and Content Fidelity"
+              data-journal="International Journal of Medical Informatics"
+              data-volume="195" data-pages="105743" data-doi="10.1016/j.ijmedinf.2024.105743">
+            <div class="item-body">
+              <strong>Picton B</strong>, <strong>Andalib S</strong>, <strong>Spina A</strong>, Camp B, Solomon SS, Liang J, Chen PM, Chen JW, Hsu FP, <strong>Oh MY</strong>.
+              <a href="https://doi.org/10.1016/j.ijmedinf.2024.105743" target="_blank" rel="noopener">Assessing AI Simplification of Medical Texts: Readability and Content Fidelity</a>.
+              <em>International Journal of Medical Informatics</em>. 2025;195:105743. doi:10.1016/j.ijmedinf.2024.105743
+            </div>
+            <div class="item-actions">
+              <button type="button" class="cite-btn" data-cite="copy">Copy citation</button>
+              <button type="button" class="cite-btn" data-cite="bibtex">BibTeX</button>
+            </div>
           </li>
 
-          <li>
-            <strong>Spina A</strong>, <strong>Andalib S</strong>, Flores D, Vermani R, Halaseh FF, <strong>Nelson AM</strong>.
-            <a href="https://www.ncbi.nlm.nih.gov/pubmed/39137416" target="_blank" rel="noopener">Evaluation of Generative Language Models in Personalizing Medical Information: Instrument Validation Study</a>.
-            <em>JMIR AI</em>. 2024;3:e54371. doi:10.2196/54371
+          <li class="year-head">2024</li>
+
+          <li class="research-item" data-type="publication" data-year="2024"
+              data-authors="Spina A, Andalib S, Flores D, Vermani R, Halaseh FF, Nelson AM"
+              data-title="Evaluation of Generative Language Models in Personalizing Medical Information: Instrument Validation Study"
+              data-journal="JMIR AI"
+              data-volume="3" data-pages="e54371" data-doi="10.2196/54371">
+            <div class="item-body">
+              <strong>Spina A</strong>, <strong>Andalib S</strong>, Flores D, Vermani R, Halaseh FF, <strong>Nelson AM</strong>.
+              <a href="https://www.ncbi.nlm.nih.gov/pubmed/39137416" target="_blank" rel="noopener">Evaluation of Generative Language Models in Personalizing Medical Information: Instrument Validation Study</a>.
+              <em>JMIR AI</em>. 2024;3:e54371. doi:10.2196/54371
+              <span class="oa-badge" title="Free full text">Open access</span>
+            </div>
+            <div class="item-actions">
+              <button type="button" class="cite-btn" data-cite="copy">Copy citation</button>
+              <button type="button" class="cite-btn" data-cite="bibtex">BibTeX</button>
+            </div>
           </li>
 
-          <li>
-            Scherr R, Halaseh FF, <strong>Spina A</strong>, <strong>Andalib S</strong>, Rivera R.
-            <a href="https://doi.org/10.2196/49877" target="_blank" rel="noopener">ChatGPT Interactive Medical Simulations for Early Clinical Education: Case Study</a>.
-            <em>JMIR Medical Education</em>. 2023;9:e49877. doi:10.2196/49877
+          <li class="year-head">2023</li>
+
+          <li class="research-item" data-type="publication" data-year="2023"
+              data-authors="Scherr R, Halaseh FF, Spina A, Andalib S, Rivera R"
+              data-title="ChatGPT Interactive Medical Simulations for Early Clinical Education: Case Study"
+              data-journal="JMIR Medical Education"
+              data-volume="9" data-pages="e49877" data-doi="10.2196/49877">
+            <div class="item-body">
+              Scherr R, Halaseh FF, <strong>Spina A</strong>, <strong>Andalib S</strong>, Rivera R.
+              <a href="https://doi.org/10.2196/49877" target="_blank" rel="noopener">ChatGPT Interactive Medical Simulations for Early Clinical Education: Case Study</a>.
+              <em>JMIR Medical Education</em>. 2023;9:e49877. doi:10.2196/49877
+              <span class="oa-badge" title="Free full text">Open access</span>
+            </div>
+            <div class="item-actions">
+              <button type="button" class="cite-btn" data-cite="copy">Copy citation</button>
+              <button type="button" class="cite-btn" data-cite="bibtex">BibTeX</button>
+            </div>
           </li>
 
         </ul>
@@ -173,42 +326,42 @@
          Presenter(s) (bold lab members). "Talk Title."
          Venue / Conference, City, Date.
          ============================================================ -->
-    <section class="research-section" aria-labelledby="talks-heading">
+    <section class="research-section" id="talks" data-section="talk" aria-labelledby="talks-heading">
       <div class="container">
         <span class="eyebrow">Talks &amp; Presentations</span>
         <h2 id="talks-heading">Talks &amp; Presentations</h2>
         <ul class="research-list">
 
-          <li>
-            <strong>Spina A</strong>, McCormick C, <strong>Andalib S</strong>, <strong>Picton B</strong>, Wade M, <strong>Fox A</strong>, Lin K, Farid M, <strong>Nelson A</strong>. "Enhancing Cataract Surgery Education and Addressing Healthcare Disparities Through a Large Language Model: A Fidelity Assessment of a RAG-Trained Custom Chatbot." American Academy of Ophthalmology Annual Meeting, Orlando, FL, October 18-20, 2025.
+          <li class="research-item" data-type="talk" data-year="2025">
+            <div class="item-body"><strong>Spina A</strong>, McCormick C, <strong>Andalib S</strong>, <strong>Picton B</strong>, Wade M, <strong>Fox A</strong>, Lin K, Farid M, <strong>Nelson A</strong>. "Enhancing Cataract Surgery Education and Addressing Healthcare Disparities Through a Large Language Model: A Fidelity Assessment of a RAG-Trained Custom Chatbot." American Academy of Ophthalmology Annual Meeting, Orlando, FL, October 18-20, 2025.</div>
           </li>
 
-          <li>
-            <strong>Andalib S</strong>, <strong>Andalib R</strong>, <strong>Spina A</strong>, <strong>Picton B</strong>, <strong>Scolaro J</strong>, <strong>Nelson A</strong>. <a href="https://www.ors.org/wp-content/uploads/AM25/126.pdf" target="_blank" rel="noopener">"A Quantitative Analysis of the Dissemination of Orthopedic Information on Social Media."</a> Podium presentation, Orthopaedic Research Society Annual Meeting, Phoenix, AZ, February 7-11, 2025.
+          <li class="research-item" data-type="talk" data-year="2025">
+            <div class="item-body"><strong>Andalib S</strong>, <strong>Andalib R</strong>, <strong>Spina A</strong>, <strong>Picton B</strong>, <strong>Scolaro J</strong>, <strong>Nelson A</strong>. <a href="https://www.ors.org/wp-content/uploads/AM25/126.pdf" target="_blank" rel="noopener">"A Quantitative Analysis of the Dissemination of Orthopedic Information on Social Media."</a> Podium presentation, Orthopaedic Research Society Annual Meeting, Phoenix, AZ, February 7-11, 2025.</div>
           </li>
 
-          <li>
-            Scherr R, Halaseh F, <strong>Spina A</strong>, <strong>Andalib S</strong>, Saadat S, Rivera R. "Assessing the Utility of Large Language Model Simulations for Clinical Medical Education: A Pilot Study." 19th Annual International Technology, Education and Development Conference, Valencia, Spain, March 3, 2025.
+          <li class="research-item" data-type="talk" data-year="2025">
+            <div class="item-body">Scherr R, Halaseh F, <strong>Spina A</strong>, <strong>Andalib S</strong>, Saadat S, Rivera R. "Assessing the Utility of Large Language Model Simulations for Clinical Medical Education: A Pilot Study." 19th Annual International Technology, Education and Development Conference, Valencia, Spain, March 3, 2025.</div>
           </li>
 
-          <li>
-            <strong>Picton B</strong>, <strong>Andalib S</strong>, Camp B, Solomon S, Liang J, Chen P, Chen JW, Hsu FP, <strong>Oh MY</strong>. <a href="https://aans2024.eventscribe.net/fsPopup.asp?PresentationID=1396083&amp;mode=presInfo" target="_blank" rel="noopener">"Balancing Readability and Content Fidelity: Assessing GPT-4.0's Simplification of Neurological Education Materials."</a> Podium presentation, American Association of Neurological Surgeons Annual Meeting, Chicago, IL, May 3-6, 2024.
+          <li class="research-item" data-type="talk" data-year="2024">
+            <div class="item-body"><strong>Picton B</strong>, <strong>Andalib S</strong>, Camp B, Solomon S, Liang J, Chen P, Chen JW, Hsu FP, <strong>Oh MY</strong>. <a href="https://aans2024.eventscribe.net/fsPopup.asp?PresentationID=1396083&amp;mode=presInfo" target="_blank" rel="noopener">"Balancing Readability and Content Fidelity: Assessing GPT-4.0's Simplification of Neurological Education Materials."</a> Podium presentation, American Association of Neurological Surgeons Annual Meeting, Chicago, IL, May 3-6, 2024.</div>
           </li>
 
-          <li>
-            <strong>Spina A</strong>, <strong>Andalib S</strong>, <strong>Picton B</strong>, Kelly R, <strong>Nelson A</strong>. "Customized Consent Form Generation Using Large Language Models." American College of Legal Medicine Annual Meeting, San Diego, CA, March 1-3, 2024.
+          <li class="research-item" data-type="talk" data-year="2024">
+            <div class="item-body"><strong>Spina A</strong>, <strong>Andalib S</strong>, <strong>Picton B</strong>, Kelly R, <strong>Nelson A</strong>. "Customized Consent Form Generation Using Large Language Models." American College of Legal Medicine Annual Meeting, San Diego, CA, March 1-3, 2024.</div>
           </li>
 
-          <li>
-            <strong>Spina A</strong>, <strong>Andalib S</strong>, Fereydouni P, Tang J, <strong>Picton B</strong>, <strong>Fox A</strong>. "Empowering Patients Through Increasing Accessibility to Glaucoma Literature." American Glaucoma Society Annual Meeting, Huntington Beach, CA, February 29-March 2, 2024.
+          <li class="research-item" data-type="talk" data-year="2024">
+            <div class="item-body"><strong>Spina A</strong>, <strong>Andalib S</strong>, Fereydouni P, Tang J, <strong>Picton B</strong>, <strong>Fox A</strong>. "Empowering Patients Through Increasing Accessibility to Glaucoma Literature." American Glaucoma Society Annual Meeting, Huntington Beach, CA, February 29-March 2, 2024.</div>
           </li>
 
-          <li>
-            <strong>Picton B</strong>, Solomon S, Fereydouni P, <strong>Andalib S</strong>, <strong>Oh M</strong>. "Artificial Intelligence for Improving Readability in Spine Research." Pacific Spine and Pain Society Annual Meeting, Ko'Olina, HI, September 6-9, 2023.
+          <li class="research-item" data-type="talk" data-year="2023">
+            <div class="item-body"><strong>Picton B</strong>, Solomon S, Fereydouni P, <strong>Andalib S</strong>, <strong>Oh M</strong>. "Artificial Intelligence for Improving Readability in Spine Research." Pacific Spine and Pain Society Annual Meeting, Ko'Olina, HI, September 6-9, 2023.</div>
           </li>
 
-          <li>
-            <strong>Spina A</strong>, Tang J, <strong>Picton B</strong>, Spiegel S. "Using ChatGPT to Improve Patient Accessibility to Neuro-Ophthalmology Research." World Congress of Neurology, Montreal, Canada, October 15-19, 2023.
+          <li class="research-item" data-type="talk" data-year="2023">
+            <div class="item-body"><strong>Spina A</strong>, Tang J, <strong>Picton B</strong>, Spiegel S. "Using ChatGPT to Improve Patient Accessibility to Neuro-Ophthalmology Research." World Congress of Neurology, Montreal, Canada, October 15-19, 2023.</div>
           </li>
 
         </ul>
@@ -224,84 +377,88 @@
          Authors (bold lab members). "Poster Title."
          Conference / venue, City, Date.
          ============================================================ -->
-    <section class="research-section" aria-labelledby="posters-heading">
+    <section class="research-section" id="posters" data-section="poster" aria-labelledby="posters-heading">
       <div class="container">
         <span class="eyebrow">Posters</span>
         <h2 id="posters-heading">Posters</h2>
         <ul class="research-list">
 
-          <li>
-            Scherr R, Halaseh F, <strong>Spina A</strong>, <strong>Andalib S</strong>, Saadat S, Rivera R. "Assessing the Utility of Large Language Model Simulations for Clinical Medical Education: A Pilot Study." Poster Presentation Finalist, American College of Physicians Annual Meeting, New Orleans, LA, April 5, 2025.
+          <li class="research-item" data-type="poster" data-year="2025">
+            <div class="item-body">Scherr R, Halaseh F, <strong>Spina A</strong>, <strong>Andalib S</strong>, Saadat S, Rivera R. "Assessing the Utility of Large Language Model Simulations for Clinical Medical Education: A Pilot Study." Poster Presentation Finalist, American College of Physicians Annual Meeting, New Orleans, LA, April 5, 2025.</div>
           </li>
 
-          <li>
-            <strong>Spina A</strong>, Yang C, Jain A, Ha C, Chen L, Yee P, Lin K. "Deep Learning-Driven Glaucoma Medication Recognition: A Clinical Validation Study in Non-English Speaking Patients with Impaired Vision." American Academy of Ophthalmology Annual Meeting, Chicago, IL, October 18-21, 2024.
+          <li class="research-item" data-type="poster" data-year="2024">
+            <div class="item-body"><strong>Spina A</strong>, Yang C, Jain A, Ha C, Chen L, Yee P, Lin K. "Deep Learning-Driven Glaucoma Medication Recognition: A Clinical Validation Study in Non-English Speaking Patients with Impaired Vision." American Academy of Ophthalmology Annual Meeting, Chicago, IL, October 18-21, 2024.</div>
           </li>
 
-          <li>
-            <strong>Spina A</strong>, Yang C, Jain A, Ha C, Chen L, Yee P, Lin K. "Deep Learning-Driven Glaucoma Medication Recognition: A Clinical Validation Study in Non-English Speaking Patients with Impaired Vision." Tenth Annual UCI Gavin Herbert Eye Institute Bench to Bedside Symposium, Irvine, CA, June 1, 2024.
+          <li class="research-item" data-type="poster" data-year="2024">
+            <div class="item-body"><strong>Spina A</strong>, Yang C, Jain A, Ha C, Chen L, Yee P, Lin K. "Deep Learning-Driven Glaucoma Medication Recognition: A Clinical Validation Study in Non-English Speaking Patients with Impaired Vision." Tenth Annual UCI Gavin Herbert Eye Institute Bench to Bedside Symposium, Irvine, CA, June 1, 2024.</div>
           </li>
 
-          <li>
-            Fereydouni P, <strong>Spina A</strong>, Tang J, <strong>Andalib S</strong>, <strong>Picton B</strong>, <strong>Fox A</strong>. <a href="https://iovs.arvojournals.org/article.aspx?articleid=2795738" target="_blank" rel="noopener">"Addressing Health-Care Disparities in Patient Comprehension Using GPT-4."</a> Association for Research in Vision and Ophthalmology Annual Meeting, Seattle, WA, May 5-9, 2024. Abstract published in <em>Investigative Ophthalmology &amp; Visual Science</em>. 2024;65(7):357.
+          <li class="research-item" data-type="poster" data-year="2024">
+            <div class="item-body">Fereydouni P, <strong>Spina A</strong>, Tang J, <strong>Andalib S</strong>, <strong>Picton B</strong>, <strong>Fox A</strong>. <a href="https://iovs.arvojournals.org/article.aspx?articleid=2795738" target="_blank" rel="noopener">"Addressing Health-Care Disparities in Patient Comprehension Using GPT-4."</a> Association for Research in Vision and Ophthalmology Annual Meeting, Seattle, WA, May 5-9, 2024. Abstract published in <em>Investigative Ophthalmology &amp; Visual Science</em>. 2024;65(7):357.</div>
           </li>
 
-          <li>
-            Fereydouni P, <strong>Andalib S</strong>, <strong>Spina A</strong>, <strong>Nelson A</strong>. "ChatGPT as a Diagnostic Assistant: Distinguishing Proper Wound Healing from Infectious or Abnormal Progression." American Academy of Pain Medicine Annual Meeting, Scottsdale, AZ, March 7-10, 2024.
+          <li class="research-item" data-type="poster" data-year="2024">
+            <div class="item-body">Fereydouni P, <strong>Andalib S</strong>, <strong>Spina A</strong>, <strong>Nelson A</strong>. "ChatGPT as a Diagnostic Assistant: Distinguishing Proper Wound Healing from Infectious or Abnormal Progression." American Academy of Pain Medicine Annual Meeting, Scottsdale, AZ, March 7-10, 2024.</div>
           </li>
 
-          <li>
-            Tang J, <strong>Spina A</strong>, <strong>Andalib S</strong>, Fereydouni P, <strong>Picton B</strong>, Spiegel S. "Optimization of Patient Education Materials in Neuro-Ophthalmology." 50th Annual North American Neuro-Ophthalmology Society Meeting, Honolulu, HI, March 2-7, 2024.
+          <li class="research-item" data-type="poster" data-year="2024">
+            <div class="item-body">Tang J, <strong>Spina A</strong>, <strong>Andalib S</strong>, Fereydouni P, <strong>Picton B</strong>, Spiegel S. "Optimization of Patient Education Materials in Neuro-Ophthalmology." 50th Annual North American Neuro-Ophthalmology Society Meeting, Honolulu, HI, March 2-7, 2024.</div>
           </li>
 
-          <li>
-            <strong>Andalib S</strong>, Fereydouni P, <strong>Spina A</strong>, <strong>Scolaro J</strong>, <strong>Nelson A</strong>. "Advancing Diagnostic Assistance in Orthopedic Surgery: Differentiating Normal from Abnormal Wound Healing Post-Surgery with AI." Orthopaedic Research Society Annual Meeting, Long Beach, CA, February 2-6, 2024.
+          <li class="research-item" data-type="poster" data-year="2024">
+            <div class="item-body"><strong>Andalib S</strong>, Fereydouni P, <strong>Spina A</strong>, <strong>Scolaro J</strong>, <strong>Nelson A</strong>. "Advancing Diagnostic Assistance in Orthopedic Surgery: Differentiating Normal from Abnormal Wound Healing Post-Surgery with AI." Orthopaedic Research Society Annual Meeting, Long Beach, CA, February 2-6, 2024.</div>
           </li>
 
-          <li>
-            <strong>Andalib S</strong>, Solomon S, <strong>Picton B</strong>, <strong>Spina A</strong>, <strong>Scolaro J</strong>, <strong>Nelson A</strong>. "Regulating Linguistic Factors to Optimize AI Simplification of Orthopedic Text." Orthopaedic Research Society Annual Meeting, Long Beach, CA, February 2-6, 2024.
+          <li class="research-item" data-type="poster" data-year="2024">
+            <div class="item-body"><strong>Andalib S</strong>, Solomon S, <strong>Picton B</strong>, <strong>Spina A</strong>, <strong>Scolaro J</strong>, <strong>Nelson A</strong>. "Regulating Linguistic Factors to Optimize AI Simplification of Orthopedic Text." Orthopaedic Research Society Annual Meeting, Long Beach, CA, February 2-6, 2024.</div>
           </li>
 
-          <li>
-            Atmar Z, <strong>Andalib S</strong>, <strong>Spina A</strong>, Dylewski J, Haspil-Corgan T. <a href="https://doi.org/10.1161/circ.148.suppl_1.18238" target="_blank" rel="noopener">"ChatGPT Has the Potential to Increase Accessibility to Cardiology Research."</a> American Heart Association Annual Meeting, Philadelphia, PA, November 11-13, 2023. Abstract MDP126; published in <em>Circulation</em>. 2023;148(Suppl_1):A18238.
+          <li class="research-item" data-type="poster" data-year="2023">
+            <div class="item-body">Atmar Z, <strong>Andalib S</strong>, <strong>Spina A</strong>, Dylewski J, Haspil-Corgan T. <a href="https://doi.org/10.1161/circ.148.suppl_1.18238" target="_blank" rel="noopener">"ChatGPT Has the Potential to Increase Accessibility to Cardiology Research."</a> American Heart Association Annual Meeting, Philadelphia, PA, November 11-13, 2023. Abstract MDP126; published in <em>Circulation</em>. 2023;148(Suppl_1):A18238.</div>
           </li>
 
-          <li>
-            <strong>Spina A</strong>, <strong>Andalib S</strong>, <strong>Fox A</strong>. "Tailoring Glaucoma Education Using GPT-4: Addressing Health-Care Disparities in Patient Comprehension." American Academy of Ophthalmology Annual Meeting, San Francisco, CA, November 3-6, 2023. Abstract PO287.
+          <li class="research-item" data-type="poster" data-year="2023">
+            <div class="item-body"><strong>Spina A</strong>, <strong>Andalib S</strong>, <strong>Fox A</strong>. "Tailoring Glaucoma Education Using GPT-4: Addressing Health-Care Disparities in Patient Comprehension." American Academy of Ophthalmology Annual Meeting, San Francisco, CA, November 3-6, 2023. Abstract PO287.</div>
           </li>
 
         </ul>
       </div>
     </section>
 
-    <div class="wave-divider" aria-hidden="true"></div>
-
     <!-- ============================================================
-         GRANTS
+         GRANTS — hidden until the first real entry lands.
+         To restore: uncomment the section below, add a "Grants"
+         chip to .section-jump in the toolbar above, and add a
+         <li class="research-item" data-type="grant" data-year="YYYY">
+         per the format comment.
 
          GRANT ENTRY FORMAT:
          "Project Title." Funder / Mechanism. Role (PI / Co-I / etc.).
          Award amount (optional). Date range.
-         ============================================================ -->
-    <section class="research-section" aria-labelledby="grants-heading">
+
+    <div class="wave-divider" aria-hidden="true"></div>
+    <section class="research-section" id="grants" data-section="grant" aria-labelledby="grants-heading">
       <div class="container">
         <span class="eyebrow">Grants</span>
         <h2 id="grants-heading">Grants</h2>
         <ul class="research-list">
-
-          <!-- TODO: replace with first real grant entry -->
-          <li class="placeholder">
-            Grant entries forthcoming.
+          <li class="research-item" data-type="grant" data-year="2026">
+            <div class="item-body">First grant entry.</div>
           </li>
-
         </ul>
       </div>
     </section>
+         ============================================================ -->
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <div>COMPREHEND Lab <span class="dot">·</span> Communication <span class="dot">·</span> Understanding <span class="dot">·</span> Impact</div>
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="" aria-hidden="true">
+        <span>COMPREHEND Lab <span class="dot">·</span> Communication <span class="dot">·</span> Understanding <span class="dot">·</span> Impact</span>
+      </div>
       <div>&copy; 2026 COMPREHEND Lab <span class="dot">·</span> <a href="https://comprehendlab.com">comprehendlab.com</a></div>
     </div>
   </footer>

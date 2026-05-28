@@ -38,13 +38,17 @@
 
   <main>
     <!-- ============================================================
-         SECTION 1 — HERO (banner-forward)
+         SECTION 1 — HERO (typographic)
          ============================================================ -->
     <section class="hero" aria-labelledby="hero-heading">
-      <img class="hero-banner" src="assets/banner.png" alt="COMPREHEND Lab — Communication, Understanding, Impact">
-      <div class="hero-tagline">
+      <div class="container hero-content">
         <span class="eyebrow">Communication · Understanding · Impact</span>
-        <p id="hero-heading" class="lead">Building scalable, evidence-based systems that make medical information accurate, accessible, and trusted in the digital era.</p>
+        <h1 id="hero-heading" class="hero-title">Making medical information <span class="accent">accurate, accessible, and trusted</span> in the digital era.</h1>
+        <p class="lead">COMPREHEND builds scalable, evidence-based systems that improve how patients understand their health, combining clinical research, AI methodology, and infodemiology.</p>
+        <div class="hero-actions">
+          <a class="btn" href="research.html">Our Research</a>
+          <a class="btn btn-secondary" href="people.html">Meet the Team</a>
+        </div>
       </div>
     </section>
     <div class="wave-divider" aria-hidden="true"></div>
@@ -62,6 +66,35 @@
     </section>
 
     <!-- ============================================================
+         SECTION 2B — BY THE NUMBERS (animated counters)
+         Counters animate from 0 on scroll. Update data-target when
+         the research and people pages change.
+         ============================================================ -->
+    <section class="section-stats" aria-labelledby="stats-heading">
+      <div class="container">
+        <h2 id="stats-heading" class="sr-only">The lab by the numbers</h2>
+        <ul class="stats-grid">
+          <li class="stat">
+            <span class="stat-num" data-target="10">0</span>
+            <span class="stat-label">Peer-reviewed publications</span>
+          </li>
+          <li class="stat">
+            <span class="stat-num" data-target="18">0</span>
+            <span class="stat-label">Talks &amp; posters</span>
+          </li>
+          <li class="stat">
+            <span class="stat-num" data-target="4">0</span>
+            <span class="stat-label">Awards</span>
+          </li>
+          <li class="stat">
+            <span class="stat-num" data-target="22">0</span>
+            <span class="stat-label">Lab members</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
          SECTION 3 — WHAT WE STUDY (three subdivisions)
          ============================================================ -->
     <section class="section-study" aria-labelledby="study-heading">
@@ -74,19 +107,40 @@
 
         <div class="card-grid">
           <article class="card">
-            <span class="eyebrow">Clinical</span>
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3v6a4 4 0 0 0 8 0V3"/>
+                <path d="M4 3h3M13 3h3"/>
+                <path d="M10 17v1a4 4 0 0 0 8 0v-3"/>
+                <circle cx="18" cy="14" r="2"/>
+              </svg>
+            </span>
             <h3>Clinical</h3>
             <p>Embeds AI-enhanced medical education in real clinical workflows and measures patient outcomes. We study how simplified, personalized content changes comprehension, anxiety, and adherence at the point of care.</p>
           </article>
 
           <article class="card">
-            <span class="eyebrow">Infodemiology</span>
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="7" r="2.4"/>
+                <circle cx="18" cy="6" r="2.4"/>
+                <circle cx="17" cy="18" r="2.4"/>
+                <circle cx="7" cy="17" r="2.4"/>
+                <path d="M8.2 7.6 15.6 6.4M7.7 9.1l8.7 7.2M8.1 15.6l7.8-7.8M7 9.3v5.4"/>
+              </svg>
+            </span>
             <h3>Infodemiology</h3>
             <p>Studies how medical information spreads across digital platforms and who controls the online medical-education ecosystem. We map the creators, channels, and incentives shaping what patients read.</p>
           </article>
 
           <article class="card">
-            <span class="eyebrow">Technical</span>
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 8l-4 4 4 4"/>
+                <path d="M15 8l4 4-4 4"/>
+                <path d="M13 6l-2 12"/>
+              </svg>
+            </span>
             <h3>Technical</h3>
             <p>Builds the computational tooling that underpins the other branches: fidelity metrics, prediction models, and AI pipelines that translate complex medical text into trustworthy, readable language.</p>
           </article>
@@ -146,7 +200,10 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <div>COMPREHEND Lab <span class="dot">·</span> Communication <span class="dot">·</span> Understanding <span class="dot">·</span> Impact</div>
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="" aria-hidden="true">
+        <span>COMPREHEND Lab <span class="dot">·</span> Communication <span class="dot">·</span> Understanding <span class="dot">·</span> Impact</span>
+      </div>
       <div>&copy; 2026 COMPREHEND Lab <span class="dot">·</span> <a href="https://comprehendlab.com">comprehendlab.com</a></div>
     </div>
   </footer>
