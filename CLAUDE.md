@@ -76,9 +76,9 @@ The complete current roster lives in `people.html`. Three top-level groups:
 
 1. **Co-Founders** (3) — Saman Andalib (UCI Ortho PGY-1), Bryce Picton (Henry Ford Neurosurgery PGY-1), Aidin Spina (UCSD Ophthalmology PGY-1). All wear the teal `FOUNDER` pill.
 2. **Faculty** (8) — grouped by specialty: Anesthesiology/Pain (Nelson), Orthopaedic Surgery (Scolaro, Hebert-Davies, Wu, Hashmi, Park), Neurosurgery (Oh), Ophthalmology (Fox). All wear the teal `ATTENDING PHYSICIAN` pill.
-3. **Trainees & Students** (11) — MS3 (Brunette, Thiagarajan), MS2 (Chang, Huang, Liu, Tazhibi, Habib), MS1 (Soliman, Chandekar), PhD (Ilaty), Undergraduate (R. Andalib). No pill.
+3. **Trainees & Students** (12) — MS4 (Solomon), MS3 (Brunette, Thiagarajan), MS2 (Chang, Huang, Liu, Tazhibi, Habib), MS1 (Soliman, Chandekar), PhD (Ilaty), Undergraduate (R. Andalib). No pill.
 
-Total: 22 members. If you add or remove members, update the `data-target` on the "Lab members" stat in `index.html` to match.
+Total: 23 members. If you add or remove members, update the `data-target` on the "Lab members" stat in `index.html` to match.
 
 Card template: `<article class="person">` containing a headshot `<img>`, optional pill, `<h3>` name, `.role` line, `.affiliation` line, an optional `.bio` paragraph, and `.email` link. Copy any existing card to add a new member. Bios are clamped to four lines and JavaScript adds a "Read more" toggle automatically when one overflows, so paste the full bio as-is.
 
